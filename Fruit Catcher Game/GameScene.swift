@@ -460,4 +460,78 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+    
+    func spawnOranges(){
+        
+        let randomXStart_four = random(min: CGRectGetMinX(gameArea), max: CGRectGetMaxX(gameArea))
+        let startPoint_four = CGPoint(x: randomXStart_three, y: self.size.height * 1.2)
+        let endPoint_four = CGPoint(x: randomXStart_three, y: -self.size.height * 0.2)
+        
+        let enemy_four = SKSpriteNode(imageNamed: "grapes")
+        enemy_four.name = "Grape"
+        enemy_three.setScale(0.2)
+        enemy_three.position = startPoint_three
+        enemy_three.zPosition = 1
+        enemy_three.physicsBody = SKPhysicsBody(rectangleOfSize: enemy_three.size)
+        enemy_three.physicsBody!.affectedByGravity = false
+        enemy_three.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy_three.physicsBody!.collisionBitMask = PhysicsCategories.None
+        enemy_three.physicsBody!.contactTestBitMask = PhysicsCategories.Player
+        self.addChild(enemy_three)
+        
+        let move_enemy_three = SKAction.moveTo(endPoint_three, duration: 4)
+        let delete_enemy_three = SKAction.removeFromParent()
+        let loseALifeAction_three = SKAction.runBlock(loseALife)
+        let enemy_three_sequence = SKAction.sequence([move_enemy_three, delete_enemy_three, loseALifeAction_three])
+        
+        if currentGameState == gameState.inGame{
+            enemy_three.runAction(enemy_three_sequence)
+        }
+    }
+    
+    func spawnWatermelons(){
+        
+        let randomXStart_three = random(min: CGRectGetMinX(gameArea), max: CGRectGetMaxX(gameArea))
+        let startPoint_three = CGPoint(x: randomXStart_three, y: self.size.height * 1.2)
+        let endPoint_three = CGPoint(x: randomXStart_three, y: -self.size.height * 0.2)
+        
+        let enemy_three = SKSpriteNode(imageNamed: "grapes")
+        enemy_three.name = "Grape"
+        enemy_three.setScale(0.2)
+        enemy_three.position = startPoint_three
+        enemy_three.zPosition = 1
+        enemy_three.physicsBody = SKPhysicsBody(rectangleOfSize: enemy_three.size)
+        enemy_three.physicsBody!.affectedByGravity = false
+        enemy_three.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy_three.physicsBody!.collisionBitMask = PhysicsCategories.None
+        enemy_three.physicsBody!.contactTestBitMask = PhysicsCategories.Player
+        self.addChild(enemy_three)
+        
+        let move_enemy_three = SKAction.moveTo(endPoint_three, duration: 4)
+        let delete_enemy_three = SKAction.removeFromParent()
+        let loseALifeAction_three = SKAction.runBlock(loseALife)
+        let enemy_three_sequence = SKAction.sequence([move_enemy_three, delete_enemy_three, loseALifeAction_three])
+        
+        if currentGameState == gameState.inGame{
+            enemy_three.runAction(enemy_three_sequence)
+        }
+    }
+    */
+    
 }

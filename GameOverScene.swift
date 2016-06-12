@@ -12,6 +12,7 @@ import SpriteKit
 class GameOverScene: SKScene{
     
     let restartLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
+    let homeLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
     
     override func didMoveToView(view: SKView) {
         let background = SKSpriteNode(imageNamed: "background")
@@ -70,6 +71,13 @@ class GameOverScene: SKScene{
         restartLabel.zPosition = 1
         restartLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.3)
         self.addChild(restartLabel)
+        
+        homeLabel.text = "Home"
+        homeLabel.fontSize = 90
+        homeLabel.fontColor = SKColor.blackColor()
+        homeLabel.zPosition = 1
+        homeLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.15)
+        self.addChild(homeLabel)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -78,6 +86,12 @@ class GameOverScene: SKScene{
             
             if restartLabel.containsPoint(pointOfTouch){
                 let sceneToMoveTo = GameScene(size: self.size)
+                sceneToMoveTo.scaleMode = self.scaleMode
+                let myTransition = SKTransition.fadeWithDuration(0.5)
+                self.view!.presentScene(sceneToMoveTo, transition: myTransition)
+            }
+            if homeLabel.containsPoint(pointOfTouch){
+                let sceneToMoveTo = IntroductionScene(size: self.size)
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let myTransition = SKTransition.fadeWithDuration(0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: myTransition)
