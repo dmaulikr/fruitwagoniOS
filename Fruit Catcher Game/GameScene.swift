@@ -1,13 +1,16 @@
-//
-//  GameScene.swift
-//  Fruit Catcher Game
-//
-//  Created by Imran Khan Afrulbasha on 5/25/16.
-//  Copyright (c) 2016 Khan. All rights reserved.
-//
+//if gameScore is equal to 3, then just run the load screen once
 
 import SpriteKit
 
+enum gameState{
+    case preGame
+    case inGame
+    case afterGame
+    //
+    case introGame
+}
+
+var currentGameState = gameState.preGame
 var gameScore = 0
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -22,12 +25,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameArea: CGRect
     
     let tapToStartLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
-    
-    enum gameState{
-        case preGame
-        case inGame
-        case afterGame
-    }
     
     func startGame(){
         currentGameState = gameState.inGame
@@ -50,7 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //...................................................................................it will start at this state
     
-    var currentGameState = gameState.preGame
+    //var currentGameState = gameState.preGame
     
     func runGameOver(){
         self.removeAllActions()
@@ -217,13 +214,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
+    func changeSceneToIntro(){
+        let sceneToMoveTo = IntroductionScene(size: self.size)
+        sceneToMoveTo.scaleMode = self.scaleMode
+        let myTransition = SKTransition.fadeWithDuration(0.5)
+        self.view!.presentScene(sceneToMoveTo, transition: myTransition)
+    }
+    
+    
     //.............................................................................................. this function will run as soon as the scene loads up
     
     override func didMoveToView(view: SKView) {
         
-        gameScore = 0
+        if currentGameState == gameState.preGame{
+            let changeSceneActionIntro = SKAction.runBlock(changeSceneToIntro)
+            let waitToChangeSceneToIntro = SKAction.waitForDuration(1)
+            let changeSceneSequenceToIntro = SKAction.sequence([waitToChangeSceneToIntro, changeSceneActionIntro])
+            self.runAction(changeSceneSequenceToIntro)
+        }
         
+        if currentGameState == gameState.introGame || currentGameState == gameState.afterGame{
+            
+        currentGameState = gameState.preGame
+         
         //................................................................................................without this, the fruits would not disappear with contact
+        
         self.physicsWorld.contactDelegate = self
         
         let background = SKSpriteNode(imageNamed: "background")
@@ -235,7 +250,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
        
         //.............................................................................................. for the box
-        player.setScale(0.5)
+        player.setScale(0.2)
         player.position = CGPoint(x: -player.size.width, y: self.size.height/5)
         player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
         player.physicsBody!.affectedByGravity = false
@@ -249,7 +264,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         scoreLabel.text = "Score: 0"
         scoreLabel.fontSize = 70
-        scoreLabel.fontColor = SKColor.whiteColor()
+        scoreLabel.fontColor = SKColor.blackColor()
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         scoreLabel.position = CGPoint(x: self.size.width*0.15, y: self.size.height + scoreLabel.frame.size.height)
         scoreLabel.zPosition = 75
@@ -257,6 +272,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         livesLabel.text = "Lives: 3"
         livesLabel.fontSize = 70
+        livesLabel.fontColor = SKColor.blackColor()
         livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
         livesLabel.position = CGPoint(x: self.size.width*0.85, y: self.size.height + scoreLabel.frame.size.height)
         livesLabel.zPosition = 75
@@ -268,7 +284,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         tapToStartLabel.text = "Tap to Begin"
         tapToStartLabel.fontSize = 100
-        tapToStartLabel.fontColor = SKColor.whiteColor()
+        tapToStartLabel.fontColor = SKColor.blackColor()
         tapToStartLabel.zPosition = 1
         tapToStartLabel.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         tapToStartLabel.alpha = 0
@@ -276,6 +292,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let fadeInAction = SKAction.fadeInWithDuration(0.3)
         tapToStartLabel.runAction(fadeInAction)
+        }
     }
     
     func addScore(){
@@ -366,7 +383,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let enemy_one = SKSpriteNode(imageNamed: "apple")
             enemy_one.name = "Apple"
-            enemy_one.setScale(0.5)
+            enemy_one.setScale(0.2)
             enemy_one.position = startPoint
             enemy_one.zPosition = 1
             enemy_one.physicsBody = SKPhysicsBody(rectangleOfSize: enemy_one.size)
@@ -394,7 +411,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let enemy_two = SKSpriteNode(imageNamed: "banana")
         enemy_two.name = "Banana"
-        enemy_two.setScale(0.5)
+        enemy_two.setScale(0.2)
         enemy_two.position = startPoint_two
         enemy_two.zPosition = 1
         enemy_two.physicsBody = SKPhysicsBody(rectangleOfSize: enemy_two.size)
@@ -422,7 +439,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let enemy_three = SKSpriteNode(imageNamed: "grapes")
         enemy_three.name = "Grape"
-        enemy_three.setScale(0.5)
+        enemy_three.setScale(0.2)
         enemy_three.position = startPoint_three
         enemy_three.zPosition = 1
         enemy_three.physicsBody = SKPhysicsBody(rectangleOfSize: enemy_three.size)

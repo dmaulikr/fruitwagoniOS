@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kMH-hY-NZO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Fruit_Catcher_Game" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Fruit_Wagon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
@@ -21,84 +20,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="507" y="-579"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="kPU-04-tHH">
-            <objects>
-                <viewController id="kMH-hY-NZO" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="G4S-jV-Hdo"/>
-                        <viewControllerLayoutGuide type="bottom" id="WGD-Qm-X4Y"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6s9-qm-EaZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_background" translatesAutoresizingMaskIntoConstraints="NO" id="yqQ-5T-yQm">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="High Score: " borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WYK-Gt-nZa">
-                                <rect key="frame" x="223" y="353" width="155" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ViZ-sC-zVu">
-                                <rect key="frame" x="219" y="442" width="163" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="GXk-uP-pyZ"/>
-                                    <constraint firstAttribute="height" constant="50" id="n5U-Xj-Uhb"/>
-                                </constraints>
-                                <state key="normal" title="PLAY" backgroundImage="play"/>
-                                <connections>
-                                    <segue destination="BV1-FR-VrT" kind="modal" id="Liz-dl-5Nw"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="box_word" translatesAutoresizingMaskIntoConstraints="NO" id="R7y-V0-Gfp">
-                                <rect key="frame" x="289" y="78" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="hQ6-pZ-Z0K"/>
-                                    <constraint firstAttribute="height" constant="150" id="rkc-fq-iTN"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="fruit_word" translatesAutoresizingMaskIntoConstraints="NO" id="IMp-Yt-Rgr">
-                                <rect key="frame" x="50" y="78" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="lwo-vj-OLu"/>
-                                    <constraint firstAttribute="width" constant="150" id="tkM-mh-Zvm"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="IMp-Yt-Rgr" firstAttribute="leading" secondItem="6s9-qm-EaZ" secondAttribute="leadingMargin" constant="30" id="5aK-i7-Hm7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="R7y-V0-Gfp" secondAttribute="trailing" constant="30" id="8Mc-MJ-a0a"/>
-                            <constraint firstItem="WGD-Qm-X4Y" firstAttribute="top" secondItem="yqQ-5T-yQm" secondAttribute="bottom" id="9FL-qi-651"/>
-                            <constraint firstAttribute="trailing" secondItem="yqQ-5T-yQm" secondAttribute="trailing" id="CGD-T1-LSz"/>
-                            <constraint firstItem="WGD-Qm-X4Y" firstAttribute="top" secondItem="ViZ-sC-zVu" secondAttribute="bottom" constant="75" id="Cn8-Fd-r54"/>
-                            <constraint firstItem="yqQ-5T-yQm" firstAttribute="top" secondItem="6s9-qm-EaZ" secondAttribute="top" id="M4w-VY-BGq"/>
-                            <constraint firstItem="IMp-Yt-Rgr" firstAttribute="top" secondItem="G4S-jV-Hdo" secondAttribute="bottom" constant="200" id="PiT-eO-MCk"/>
-                            <constraint firstItem="ViZ-sC-zVu" firstAttribute="leading" secondItem="6s9-qm-EaZ" secondAttribute="leadingMargin" constant="50" id="Wj5-hK-lGb"/>
-                            <constraint firstItem="yqQ-5T-yQm" firstAttribute="leading" secondItem="6s9-qm-EaZ" secondAttribute="leading" id="Y4r-b8-qbX"/>
-                            <constraint firstItem="R7y-V0-Gfp" firstAttribute="top" secondItem="G4S-jV-Hdo" secondAttribute="bottom" constant="200" id="mrH-e5-dte"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ViZ-sC-zVu" secondAttribute="trailing" constant="50" id="td2-tl-cfx"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="WYK-Gt-nZa"/>
-                            </mask>
-                        </variation>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OL7-S6-O0b" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-266" y="-579"/>
+            <point key="canvasLocation" x="-281" y="-1078"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="box_word" width="225" height="225"/>
-        <image name="fruit_word" width="674" height="339"/>
-        <image name="main_background" width="5000" height="3750"/>
-        <image name="play" width="960" height="632"/>
-    </resources>
 </document>

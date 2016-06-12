@@ -34,7 +34,7 @@ class GameOverScene: SKScene{
         let gameOverLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
         gameOverLabel.text = "Game Over"
         gameOverLabel.fontSize = 200
-        gameOverLabel.fontColor = SKColor.whiteColor()
+        gameOverLabel.fontColor = SKColor.blackColor()
         gameOverLabel.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.7)
         gameOverLabel.zPosition = 1
         self.addChild(gameOverLabel)
@@ -43,7 +43,7 @@ class GameOverScene: SKScene{
         let scoreLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
         scoreLabel.text = "Score: \(gameScore)"
         scoreLabel.fontSize = 125
-        scoreLabel.fontColor = SKColor.whiteColor()
+        scoreLabel.fontColor = SKColor.blackColor()
         scoreLabel.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.55)
         scoreLabel.zPosition = 1
         self.addChild(scoreLabel)
@@ -59,14 +59,14 @@ class GameOverScene: SKScene{
         let highScoreLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
         highScoreLabel.text = "High Score: \(highScoreNumber)"
         highScoreLabel.fontSize = 125
-        highScoreLabel.fontColor = SKColor.whiteColor()
+        highScoreLabel.fontColor = SKColor.blackColor()
         highScoreLabel.zPosition = 1
         highScoreLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.45)
         self.addChild(highScoreLabel)
         
         restartLabel.text = "Restart"
         restartLabel.fontSize = 90
-        restartLabel.fontColor = SKColor.whiteColor()
+        restartLabel.fontColor = SKColor.blackColor()
         restartLabel.zPosition = 1
         restartLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.3)
         self.addChild(restartLabel)
