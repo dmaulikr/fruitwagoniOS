@@ -9,10 +9,15 @@
 import Foundation
 import SpriteKit
 
+let defaults = NSUserDefaults()
+var highScoreNumber = defaults.integerForKey("highScoreSaved")
+
 class GameOverScene: SKScene{
     
     let restartLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
     let homeLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
+    let resetScoreLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
+    
     
     override func didMoveToView(view: SKView) {
         let background = SKSpriteNode(imageNamed: "background")
@@ -49,8 +54,8 @@ class GameOverScene: SKScene{
         scoreLabel.zPosition = 1
         self.addChild(scoreLabel)
         
-        let defaults = NSUserDefaults()
-        var highScoreNumber = defaults.integerForKey("highScoreSaved")
+       // let defaults = NSUserDefaults()
+       // var highScoreNumber = defaults.integerForKey("highScoreSaved")
         
         if gameScore > highScoreNumber{
             highScoreNumber = gameScore
@@ -78,6 +83,15 @@ class GameOverScene: SKScene{
         homeLabel.zPosition = 1
         homeLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.15)
         self.addChild(homeLabel)
+        
+        
+        resetScoreLabel.text = "Reset High Score"
+        resetScoreLabel.fontSize = 90
+        resetScoreLabel.fontColor = SKColor.blackColor()
+        resetScoreLabel.zPosition = 1
+        resetScoreLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.05)
+        self.addChild(resetScoreLabel)
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -89,16 +103,26 @@ class GameOverScene: SKScene{
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let myTransition = SKTransition.fadeWithDuration(0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: myTransition)
+                
+                gameScore = 0
             }
             if homeLabel.containsPoint(pointOfTouch){
                 let sceneToMoveTo = IntroductionScene(size: self.size)
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let myTransition = SKTransition.fadeWithDuration(0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: myTransition)
+                
+                gameScore = 0
             }
-        }
+            if resetScoreLabel.containsPoint(pointOfTouch){
+                highScoreNumber = 0
+                defaults.setInteger(highScoreNumber, forKey: "highScoreSaved")
+                
+                gameScore = 0
+            }
+            
     }
-    
+    }
 }
 
 

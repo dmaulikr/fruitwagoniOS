@@ -17,6 +17,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var levelNumber_a = 0
     var levelNumber_b = 0
     var levelNumber_g = 0
+    var levelNumber_o = 0
+    var levelNumber_w = 0
     var LivesNumber = 3
     let scoreLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
     let livesLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
@@ -47,8 +49,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //...................................................................................it will start at this state
     
-    //var currentGameState = gameState.preGame
-    
     func runGameOver(){
         self.removeAllActions()
        
@@ -65,6 +65,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.enumerateChildNodesWithName("Grape"){
             grape, stop in
             grape.removeAllActions()
+        }
+        self.enumerateChildNodesWithName("Orange"){
+            orange, stop in
+            orange.removeAllActions()
+        }
+        self.enumerateChildNodesWithName("Watermelon"){
+            watermelon, stop in
+            watermelon.removeAllActions()
         }
         
         currentGameState = gameState.afterGame
@@ -130,6 +138,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         levelNumber_a += 1
         levelNumber_b += 1
         levelNumber_g += 1
+        levelNumber_o += 1
+        levelNumber_w += 1
         
         //...........................................................................................  this allows us to stop the current level with it's special key and start a new one
         if self.actionForKey("spawningEnemies_one") != nil{
@@ -141,10 +151,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if self.actionForKey("spawningEnemies_three") != nil{
             self.removeActionForKey("spawningEnemies_three")
         }
+        if self.actionForKey("spawningEnemies_four") != nil{
+            self.removeActionForKey("spawningEnemies_four")
+        }
+        if self.actionForKey("spawningEnemies_five") != nil{
+            self.removeActionForKey("spawningEnemies_five")
+        }
         
         var levelDuration_a = NSTimeInterval()
         var levelDuration_b = NSTimeInterval()
         var levelDuration_g = NSTimeInterval()
+        var levelDuration_o = NSTimeInterval()
+        var levelDuration_w = NSTimeInterval()
         
         //...........................................................................................  level duration would signify the frequency of falling
         
@@ -178,6 +196,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("cannot find level number information")
         }
         
+        switch levelNumber_o{
+        case 1: levelDuration_o = 6.2
+        case 2: levelDuration_o = 5.1
+        case 3: levelDuration_o = 3.6
+        case 4: levelDuration_o = 2.9
+        default:
+            levelDuration_o = 0.5
+            print("cannot find level number information")
+        }
+        
+        switch levelNumber_w{
+        case 1: levelDuration_w = 6.7
+        case 2: levelDuration_w = 5.9
+        case 3: levelDuration_w = 3.9
+        case 4: levelDuration_w = 3.0
+        default:
+            levelDuration_w = 0.5
+            print("cannot find level number information")
+        }
+        
         let spawn =  SKAction.runBlock(spawnApples)
         let waitToSpawn = SKAction.waitForDuration(levelDuration_a)
         let spawnSequence = SKAction.sequence([waitToSpawn, spawn])
@@ -195,6 +233,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let spawnSequence_three = SKAction.sequence([waitToSpawn_three, spawn_three])
         let spawnForever_three = SKAction.repeatActionForever(spawnSequence_three)
         self.runAction(spawnForever_three, withKey: "spawningEnemies_three")
+        
+        let spawn_four =  SKAction.runBlock(spawnOranges)
+        let waitToSpawn_four = SKAction.waitForDuration(levelDuration_o)
+        let spawnSequence_four = SKAction.sequence([waitToSpawn_four, spawn_four])
+        let spawnForever_four = SKAction.repeatActionForever(spawnSequence_four)
+        self.runAction(spawnForever_four, withKey: "spawningEnemies_four")
+        
+        let spawn_five =  SKAction.runBlock(spawnWatermelons)
+        let waitToSpawn_five = SKAction.waitForDuration(levelDuration_w)
+        let spawnSequence_five = SKAction.sequence([waitToSpawn_five, spawn_five])
+        let spawnForever_five = SKAction.repeatActionForever(spawnSequence_five)
+        self.runAction(spawnForever_five, withKey: "spawningEnemies_five")
     }
     
     
@@ -359,20 +409,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let explosionSequence = SKAction.sequence([scaleIn, fadeOut, delete])
         explosion.runAction(explosionSequence)
     }
-    
-    func spawnPoof(spawnPosition: CGPoint){
-        let explosion_two = SKSpriteNode(imageNamed: "poof")
-        explosion_two.position = spawnPosition
-        explosion_two.setScale(0)
-        explosion_two.zPosition = 1
-        self.addChild(explosion_two)
-        
-        let scaleIn_two = SKAction.scaleTo(1, duration: 0.1)
-        let fadeOut_two = SKAction.fadeOutWithDuration(0.1)
-        let delete_two = SKAction.removeFromParent()
-        let explosionSequence_two = SKAction.sequence([scaleIn_two, fadeOut_two, delete_two])
-        explosion_two.runAction(explosionSequence_two)
-    }
 
     
         func spawnApples(){
@@ -459,79 +495,61 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    
     func spawnOranges(){
         
         let randomXStart_four = random(min: CGRectGetMinX(gameArea), max: CGRectGetMaxX(gameArea))
-        let startPoint_four = CGPoint(x: randomXStart_three, y: self.size.height * 1.2)
-        let endPoint_four = CGPoint(x: randomXStart_three, y: -self.size.height * 0.2)
+        let startPoint_four = CGPoint(x: randomXStart_four, y: self.size.height * 1.2)
+        let endPoint_four = CGPoint(x: randomXStart_four, y: -self.size.height * 0.2)
         
-        let enemy_four = SKSpriteNode(imageNamed: "grapes")
-        enemy_four.name = "Grape"
-        enemy_three.setScale(0.2)
-        enemy_three.position = startPoint_three
-        enemy_three.zPosition = 1
-        enemy_three.physicsBody = SKPhysicsBody(rectangleOfSize: enemy_three.size)
-        enemy_three.physicsBody!.affectedByGravity = false
-        enemy_three.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
-        enemy_three.physicsBody!.collisionBitMask = PhysicsCategories.None
-        enemy_three.physicsBody!.contactTestBitMask = PhysicsCategories.Player
-        self.addChild(enemy_three)
+        let enemy_four = SKSpriteNode(imageNamed: "orange")
+        enemy_four.name = "Orange"
+        enemy_four.setScale(0.2)
+        enemy_four.position = startPoint_four
+        enemy_four.zPosition = 1
+        enemy_four.physicsBody = SKPhysicsBody(rectangleOfSize: enemy_four.size)
+        enemy_four.physicsBody!.affectedByGravity = false
+        enemy_four.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy_four.physicsBody!.collisionBitMask = PhysicsCategories.None
+        enemy_four.physicsBody!.contactTestBitMask = PhysicsCategories.Player
+        self.addChild(enemy_four)
         
-        let move_enemy_three = SKAction.moveTo(endPoint_three, duration: 4)
-        let delete_enemy_three = SKAction.removeFromParent()
-        let loseALifeAction_three = SKAction.runBlock(loseALife)
-        let enemy_three_sequence = SKAction.sequence([move_enemy_three, delete_enemy_three, loseALifeAction_three])
+        let move_enemy_four = SKAction.moveTo(endPoint_four, duration: 4)
+        let delete_enemy_four = SKAction.removeFromParent()
+        let loseALifeAction_four = SKAction.runBlock(loseALife)
+        let enemy_four_sequence = SKAction.sequence([move_enemy_four, delete_enemy_four, loseALifeAction_four])
         
         if currentGameState == gameState.inGame{
-            enemy_three.runAction(enemy_three_sequence)
+            enemy_four.runAction(enemy_four_sequence)
         }
     }
     
     func spawnWatermelons(){
         
-        let randomXStart_three = random(min: CGRectGetMinX(gameArea), max: CGRectGetMaxX(gameArea))
-        let startPoint_three = CGPoint(x: randomXStart_three, y: self.size.height * 1.2)
-        let endPoint_three = CGPoint(x: randomXStart_three, y: -self.size.height * 0.2)
+        let randomXStart_five = random(min: CGRectGetMinX(gameArea), max: CGRectGetMaxX(gameArea))
+        let startPoint_five = CGPoint(x: randomXStart_five, y: self.size.height * 1.2)
+        let endPoint_five = CGPoint(x: randomXStart_five, y: -self.size.height * 0.2)
         
-        let enemy_three = SKSpriteNode(imageNamed: "grapes")
-        enemy_three.name = "Grape"
-        enemy_three.setScale(0.2)
-        enemy_three.position = startPoint_three
-        enemy_three.zPosition = 1
-        enemy_three.physicsBody = SKPhysicsBody(rectangleOfSize: enemy_three.size)
-        enemy_three.physicsBody!.affectedByGravity = false
-        enemy_three.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
-        enemy_three.physicsBody!.collisionBitMask = PhysicsCategories.None
-        enemy_three.physicsBody!.contactTestBitMask = PhysicsCategories.Player
-        self.addChild(enemy_three)
+        let enemy_five = SKSpriteNode(imageNamed: "watermelon")
+        enemy_five.name = "Watermelon"
+        enemy_five.setScale(0.2)
+        enemy_five.position = startPoint_five
+        enemy_five.zPosition = 1
+        enemy_five.physicsBody = SKPhysicsBody(rectangleOfSize: enemy_five.size)
+        enemy_five.physicsBody!.affectedByGravity = false
+        enemy_five.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy_five.physicsBody!.collisionBitMask = PhysicsCategories.None
+        enemy_five.physicsBody!.contactTestBitMask = PhysicsCategories.Player
+        self.addChild(enemy_five)
         
-        let move_enemy_three = SKAction.moveTo(endPoint_three, duration: 4)
-        let delete_enemy_three = SKAction.removeFromParent()
-        let loseALifeAction_three = SKAction.runBlock(loseALife)
-        let enemy_three_sequence = SKAction.sequence([move_enemy_three, delete_enemy_three, loseALifeAction_three])
+        let move_enemy_five = SKAction.moveTo(endPoint_five, duration: 4)
+        let delete_enemy_five = SKAction.removeFromParent()
+        let loseALifeAction_five = SKAction.runBlock(loseALife)
+        let enemy_five_sequence = SKAction.sequence([move_enemy_five, delete_enemy_five, loseALifeAction_five])
         
         if currentGameState == gameState.inGame{
-            enemy_three.runAction(enemy_three_sequence)
+            enemy_five.runAction(enemy_five_sequence)
         }
     }
-    */
+    
     
 }
