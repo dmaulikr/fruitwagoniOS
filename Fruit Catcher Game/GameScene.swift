@@ -1,4 +1,6 @@
-//if gameScore is equal to 3, then just run the load screen once
+//could use a for loop where you call "add score"
+//it would loop more times for more points
+//different fruits would have different point values
 
 import SpriteKit
 
