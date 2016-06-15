@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -22,18 +21,16 @@
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="iWY-JF-QMj" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="0bt-m4-0Hj"/>
                             <constraint firstAttribute="trailing" secondItem="iWY-JF-QMj" secondAttribute="trailing" constant="-60" id="A5Q-3b-jWJ"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="iWY-JF-QMj" secondAttribute="bottom" id="FTn-x5-xhq"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="iWY-JF-QMj" secondAttribute="bottom" id="TkH-J7-X3Y"/>
+                            <constraint firstItem="iWY-JF-QMj" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="-10" id="Gul-NX-c9f"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="iWY-JF-QMj" secondAttribute="bottom" constant="-10" id="OjM-gE-Cct"/>
                             <constraint firstItem="iWY-JF-QMj" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-60" id="dbT-CX-juj"/>
-                            <constraint firstItem="iWY-JF-QMj" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="kFQ-P8-Ome"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="323" y="133"/>
+            <point key="canvasLocation" x="132" y="112"/>
         </scene>
     </scenes>
     <resources>

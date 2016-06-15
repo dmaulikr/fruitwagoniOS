@@ -1,18 +1,10 @@
-//
-//  GameOverScene.swift
-//  Fruit Catcher Game
-//
-//  Created by Imran Khan Afrulbasha on 6/3/16.
-//  Copyright © 2016 Khan. All rights reserved.
-//
-
 import Foundation
 import SpriteKit
 
-let defaults = NSUserDefaults()
-var highScoreNumber = defaults.integerForKey("highScoreSaved")
+let defaults_two = NSUserDefaults()
+var highScoreNumber_two = defaults.integerForKey("highScoreSaved_two")
 
-class GameOverScene: SKScene{
+class GameOverSceneTwo: SKScene{
     
     let restartLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
     let homeLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
@@ -21,7 +13,7 @@ class GameOverScene: SKScene{
     
     override func didMoveToView(view: SKView) {
         
-        let background = SKSpriteNode(imageNamed: "background")
+        let background = SKSpriteNode(imageNamed: "blue_background")
         background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         background.size = self.size
         background.zPosition = 0
@@ -45,26 +37,26 @@ class GameOverScene: SKScene{
         gameOverLabel.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.7)
         gameOverLabel.zPosition = 1
         self.addChild(gameOverLabel)
-
+        
         
         let scoreLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
-        scoreLabel.text = "Wagon Score: \(gameScore)"
+        scoreLabel.text = "Touch Score: \(gameScore)"
         scoreLabel.fontSize = 125
         scoreLabel.fontColor = SKColor.blackColor()
         scoreLabel.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.55)
         scoreLabel.zPosition = 1
         self.addChild(scoreLabel)
         
-       // let defaults = NSUserDefaults()
-       // var highScoreNumber = defaults.integerForKey("highScoreSaved")
+        // let defaults = NSUserDefaults()
+        // var highScoreNumber = defaults.integerForKey("highScoreSaved")
         
-        if gameScore > highScoreNumber{
-            highScoreNumber = gameScore
-            defaults.setInteger(highScoreNumber, forKey: "highScoreSaved")
+        if gameScore > highScoreNumber_two{
+            highScoreNumber_two = gameScore
+            defaults_two.setInteger(highScoreNumber_two, forKey: "highScoreSaved_two")
         }
         
         let highScoreLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
-        highScoreLabel.text = "Wagon High Score: \(highScoreNumber)"
+        highScoreLabel.text = "Touch High Score: \(highScoreNumber_two)"
         highScoreLabel.fontSize = 125
         highScoreLabel.fontColor = SKColor.blackColor()
         highScoreLabel.zPosition = 1
@@ -100,7 +92,7 @@ class GameOverScene: SKScene{
             let pointOfTouch = touch.locationInNode(self)
             
             if restartLabel.containsPoint(pointOfTouch){
-                let sceneToMoveTo = GameScene(size: self.size)
+                let sceneToMoveTo = GameSceneTwo(size: self.size)
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let myTransition = SKTransition.fadeWithDuration(0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: myTransition)
@@ -116,15 +108,17 @@ class GameOverScene: SKScene{
                 gameScore = 0
             }
             if resetScoreLabel.containsPoint(pointOfTouch){
-                highScoreNumber = 0
-                defaults.setInteger(highScoreNumber, forKey: "highScoreSaved")
+                
+                highScoreNumber_two = 0
+                defaults_two.setInteger(highScoreNumber_two, forKey: "highScoreSaved_two")
                 
                 gameScore = 0
             }
             
-    }
+        }
     }
 }
+
 
 
 

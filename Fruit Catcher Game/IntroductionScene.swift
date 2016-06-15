@@ -17,7 +17,7 @@ class IntroductionScene: SKScene{
         
         currentGameState = gameState.introGame
         
-        let background = SKSpriteNode(imageNamed: "main_background")
+        let background = SKSpriteNode(imageNamed: "purple_background")
         background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         background.size = self.size
         background.zPosition = 0
@@ -37,8 +37,8 @@ class IntroductionScene: SKScene{
         titleLabel.zPosition = 1
         self.addChild(titleLabel)
         
-        playLabel.text = "Play"
-        playLabel.fontSize = 90
+        playLabel.text = "--- Play ---"
+        playLabel.fontSize = 110
         playLabel.fontColor = SKColor.blackColor()
         playLabel.zPosition = 1
         playLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.1)
@@ -50,14 +50,14 @@ class IntroductionScene: SKScene{
             let pointOfTouch = touch.locationInNode(self)
                 
                 if playLabel.containsPoint(pointOfTouch){
-                    let sceneToMoveTo = GameScene(size: self.size)
+                    let sceneToMoveTo = GameModeScreen(size: self.size)
                     sceneToMoveTo.scaleMode = self.scaleMode
                     let myTransition = SKTransition.fadeWithDuration(0.5)
                     self.view!.presentScene(sceneToMoveTo, transition: myTransition)
                 }
+            }
+        }
     }
-}
-}
 
 
 
