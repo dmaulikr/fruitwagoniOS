@@ -169,41 +169,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //...........................................................................................  level duration would signify the frequency of falling
         
         switch levelNumber_a{
-        case 1: wait_a = SKAction.waitForDuration(8, withRange: 3)
-        case 2: wait_a = SKAction.waitForDuration(6, withRange: 3)
-        case 3: wait_a = SKAction.waitForDuration(3, withRange: 3)
+        case 1: wait_a = SKAction.waitForDuration(10, withRange: 10)
+        case 2: wait_a = SKAction.waitForDuration(5, withRange: 8)
+        case 3: wait_a = SKAction.waitForDuration(3, withRange: 5)
         case 4: wait_a = SKAction.waitForDuration(2, withRange: 3)
         default: wait_a = SKAction.waitForDuration(5.5, withRange: 3)
         }
         
         switch levelNumber_b{
-        case 1: wait_b = SKAction.waitForDuration(7.8, withRange: 3)
-        case 2: wait_b = SKAction.waitForDuration(5.8, withRange: 3)
-        case 3: wait_b = SKAction.waitForDuration(2.8, withRange: 3)
+        case 1: wait_b = SKAction.waitForDuration(9, withRange: 10)
+        case 2: wait_b = SKAction.waitForDuration(5, withRange: 8)
+        case 3: wait_b = SKAction.waitForDuration(3, withRange: 6)
         case 4: wait_b = SKAction.waitForDuration(1.9, withRange: 3)
         default: wait_b = SKAction.waitForDuration(5.3, withRange: 3)
         }
         
         switch levelNumber_g{
-        case 1: wait_g = SKAction.waitForDuration(7, withRange: 3)
-        case 2: wait_g = SKAction.waitForDuration(5, withRange: 3)
-        case 3: wait_g = SKAction.waitForDuration(2.2, withRange: 3)
+        case 1: wait_g = SKAction.waitForDuration(10, withRange: 10)
+        case 2: wait_g = SKAction.waitForDuration(5, withRange: 8)
+        case 3: wait_g = SKAction.waitForDuration(3, withRange: 5)
         case 4: wait_g = SKAction.waitForDuration(1.2, withRange: 3)
         default: wait_g = SKAction.waitForDuration(4.8, withRange: 3)
         }
         
         switch levelNumber_o{
-        case 1: wait_o = SKAction.waitForDuration(7.7, withRange: 3)
-        case 2: wait_o = SKAction.waitForDuration(5.7, withRange: 3)
-        case 3: wait_o = SKAction.waitForDuration(2.3, withRange: 3)
+        case 1: wait_o = SKAction.waitForDuration(11, withRange: 10)
+        case 2: wait_o = SKAction.waitForDuration(6, withRange: 8)
+        case 3: wait_o = SKAction.waitForDuration(5, withRange: 6)
         case 4: wait_o = SKAction.waitForDuration(1.4, withRange: 3)
         default: wait_o = SKAction.waitForDuration(5, withRange: 3)
         }
         
         switch levelNumber_w{
-        case 1: wait_w = SKAction.waitForDuration(12, withRange: 3)
-        case 2: wait_w = SKAction.waitForDuration(10, withRange: 3)
-        case 3: wait_w = SKAction.waitForDuration(5, withRange: 3)
+        case 1: wait_w = SKAction.waitForDuration(12, withRange: 10)
+        case 2: wait_w = SKAction.waitForDuration(7, withRange: 8)
+        case 3: wait_w = SKAction.waitForDuration(6, withRange: 7)
         case 4: wait_w = SKAction.waitForDuration(4, withRange: 3)
         default: wait_w = SKAction.waitForDuration(9, withRange: 3)
         }
@@ -338,7 +338,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameScore += 1
         scoreLabel.text = "Score: \(gameScore)"
         
-        if gameScore == 10 || gameScore == 20 || gameScore == 30{
+        if gameScore == 20 || gameScore == 40 || gameScore == 60{
             startNewLevel()
         }
     }
@@ -417,7 +417,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_one.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_one)
             
-        let move_enemy_one = SKAction.moveTo(endPoint, duration: 4)
+        let move_enemy_one = SKAction.moveTo(endPoint, duration: 5)
         let delete_enemy_one = SKAction.removeFromParent()
         let loseALifeAction = SKAction.runBlock(loseALife)
         let enemy_one_sequence = SKAction.sequence([move_enemy_one, delete_enemy_one, loseALifeAction])
@@ -445,7 +445,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_two.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_two)
         
-        let move_enemy_two = SKAction.moveTo(endPoint_two, duration: 4)
+        let move_enemy_two = SKAction.moveTo(endPoint_two, duration: 5)
         let delete_enemy_two = SKAction.removeFromParent()
         let loseALifeAction_two = SKAction.runBlock(loseALife)
         let enemy_two_sequence = SKAction.sequence([move_enemy_two, delete_enemy_two,loseALifeAction_two])
@@ -473,7 +473,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_three.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_three)
         
-        let move_enemy_three = SKAction.moveTo(endPoint_three, duration: 4)
+        let move_enemy_three = SKAction.moveTo(endPoint_three, duration: 5)
         let delete_enemy_three = SKAction.removeFromParent()
         let loseALifeAction_three = SKAction.runBlock(loseALife)
         let enemy_three_sequence = SKAction.sequence([move_enemy_three, delete_enemy_three, loseALifeAction_three])
@@ -501,7 +501,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_four.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_four)
         
-        let move_enemy_four = SKAction.moveTo(endPoint_four, duration: 4)
+        let move_enemy_four = SKAction.moveTo(endPoint_four, duration: 5)
         let delete_enemy_four = SKAction.removeFromParent()
         let loseALifeAction_four = SKAction.runBlock(loseALife)
         let enemy_four_sequence = SKAction.sequence([move_enemy_four, delete_enemy_four, loseALifeAction_four])
@@ -529,7 +529,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_five.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_five)
         
-        let move_enemy_five = SKAction.moveTo(endPoint_five, duration: 4)
+        let move_enemy_five = SKAction.moveTo(endPoint_five, duration: 5)
         let delete_enemy_five = SKAction.removeFromParent()
         let loseALifeAction_five = SKAction.runBlock(loseALife)
         let enemy_five_sequence = SKAction.sequence([move_enemy_five, delete_enemy_five, loseALifeAction_five])
