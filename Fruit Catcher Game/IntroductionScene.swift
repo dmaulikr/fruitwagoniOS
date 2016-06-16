@@ -1,10 +1,4 @@
-//
-//  IntroductionScene.swift
-//  Fruit Wagon
-//
-//  Created by Imran Khan Afrulbasha on 6/12/16.
-//  Copyright © 2016 Khan. All rights reserved.
-//
+
 
 import Foundation
 import SpriteKit

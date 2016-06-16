@@ -1,10 +1,4 @@
-//
-//  GameOverScene.swift
-//  Fruit Catcher Game
-//
-//  Created by Imran Khan Afrulbasha on 6/3/16.
-//  Copyright © 2016 Khan. All rights reserved.
-//
+
 
 import Foundation
 import SpriteKit

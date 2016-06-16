@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Fruit Catcher Game
-//
-//  Created by Imran Khan Afrulbasha on 5/25/16.
-//  Copyright © 2016 Khan. All rights reserved.
-//
 
 import UIKit
 
