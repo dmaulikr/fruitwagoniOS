@@ -129,7 +129,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let Player : UInt32 = 0b1            // 1
         static let Ice : UInt32 = 0b10              // 2
         static let Life : UInt32 = 0b100            // 4
-        static let Enemy : UInt32 = 0b1000          // 8
+        
+        static let Apple : UInt32 = 0b1000
+        static let Orange : UInt32 = 0b10000
+        static let Banana : UInt32 = 0b100000
+        static let Watermelon : UInt32 = 0b1000000
+        static let Grape : UInt32 = 0b1000000000
+
+        
+        //static let Enemy : UInt32 = 0b1000          // 8
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -145,11 +153,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             body2 = contact.bodyA
         }
        
-        if (body1.categoryBitMask == PhysicsCategories.Player && body2.categoryBitMask == PhysicsCategories.Enemy){
+        if (body1.categoryBitMask == PhysicsCategories.Player && (body2.categoryBitMask == PhysicsCategories.Apple ||
+                                                                  body2.categoryBitMask == PhysicsCategories.Orange ||
+                                                                  body2.categoryBitMask == PhysicsCategories.Watermelon ||
+                                                                  body2.categoryBitMask == PhysicsCategories.Grape ||
+                                                                  body2.categoryBitMask == PhysicsCategories.Banana)){
             body2.node?.removeFromParent()
             spawnExplosion(body1.node!.position)
             addScore()
+            //spawnPlusOne(body1.node!.position)
+            
+                if body2.categoryBitMask == PhysicsCategories.Apple || body2.categoryBitMask == PhysicsCategories.Banana ||
+                   body2.categoryBitMask == PhysicsCategories.Orange{
+                    spawnPlusOne(body1.node!.position)
+                    body2.node?.removeFromParent()
+                }
+                if body2.categoryBitMask == PhysicsCategories.Grape{
+                    spawnPlusThree(body1.node!.position)
+                    body2.node?.removeFromParent()
+                }
+                if body2.categoryBitMask == PhysicsCategories.Watermelon{
+                    spawnPlusFive(body1.node!.position)
+                    body2.node?.removeFromParent()
+                }
         }
+        
         
         if (body1.categoryBitMask == PhysicsCategories.Player && body2.categoryBitMask == PhysicsCategories.Life){
             addALife()
@@ -187,7 +215,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         startGame()
     }
     
-    //change the gae state to pregame right after the timer for the freezer ends for approximately 5 seconds.
+    //change the game state to pregame right after the timer for the freezer ends for approximately 5 seconds.
     
     func endTimer_one(){
         currentGameState = gameState.inGame
@@ -385,7 +413,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.affectedByGravity = false
         player.physicsBody!.categoryBitMask = PhysicsCategories.Player
         player.physicsBody!.collisionBitMask = PhysicsCategories.None
-        player.physicsBody!.contactTestBitMask = PhysicsCategories.Enemy
+        player.physicsBody!.contactTestBitMask = PhysicsCategories.Apple | PhysicsCategories.Orange | PhysicsCategories.Banana
+                                                    PhysicsCategories.Watermelon | PhysicsCategories.Grape
         player.zPosition = 2
         self.addChild(player)
         
@@ -482,7 +511,66 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func spawnPlusOne(spawnPosition: CGPoint){
+        
+        let plus_one = SKSpriteNode(imageNamed: "the_plus_one")
+        plus_one.position = spawnPosition
+        plus_one.setScale(0)
+        plus_one.zPosition = 2
+        self.addChild(plus_one)
+        
+        let fadeOut_plus_one = SKAction.fadeOutWithDuration(0.1)
+        let scaleIn = SKAction.scaleTo(0.1, duration: 0.1)
+        let endPointPlusOne = CGPoint(x: spawnPosition.x, y: spawnPosition.y + 700)
+        let delete_plus_one = SKAction.removeFromParent()
+        let move_plus_one = SKAction.moveTo(endPointPlusOne, duration: 0.75)
+        
+        let plusOneSequence = SKAction.sequence([scaleIn, move_plus_one, fadeOut_plus_one, delete_plus_one])
+        
+        plus_one.runAction(plusOneSequence)
+        
+    }
+    func spawnPlusThree(spawnPosition: CGPoint){
+        
+        let plus_three = SKSpriteNode(imageNamed: "the_plus_three")
+        plus_three.position = spawnPosition
+        plus_three.setScale(0)
+        plus_three.zPosition = 2
+        self.addChild(plus_three)
+        
+        let fadeOut_plus_three = SKAction.fadeOutWithDuration(0.1)
+        let scaleIn = SKAction.scaleTo(0.1, duration: 0.1)
+        let endPointPlusThree = CGPoint(x: spawnPosition.x, y: spawnPosition.y + 700)
+        let delete_plus_three = SKAction.removeFromParent()
+        let move_plus_three = SKAction.moveTo(endPointPlusThree, duration: 0.75)
+        
+        let plusThreeSequence = SKAction.sequence([scaleIn, move_plus_three, fadeOut_plus_three, delete_plus_three])
+        
+        plus_three.runAction(plusThreeSequence)
+        
+    }
+    func spawnPlusFive(spawnPosition: CGPoint){
+        
+        let plus_five = SKSpriteNode(imageNamed: "the_plus_five")
+        plus_five.position = spawnPosition
+        plus_five.setScale(0)
+        plus_five.zPosition = 2
+        self.addChild(plus_five)
+        
+        let fadeOut_five = SKAction.fadeOutWithDuration(0.1)
+        let scaleIn = SKAction.scaleTo(0.1, duration: 0.1)
+        let endPointPlusFive = CGPoint(x: spawnPosition.x, y: spawnPosition.y + 700)
+        let delete_plus_five = SKAction.removeFromParent()
+        let move_plus_five = SKAction.moveTo(endPointPlusFive, duration: 0.75)
+        
+        let plusFiveSequence = SKAction.sequence([scaleIn, move_plus_five, fadeOut_five, delete_plus_five])
+        
+        plus_five.runAction(plusFiveSequence)
+        
+    }
+    
     func spawnExplosion(spawnPosition: CGPoint){
+        
         let explosion = SKSpriteNode(imageNamed: "explosion")
         explosion.position = spawnPosition
         explosion.setScale(0)
@@ -492,7 +580,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let scaleIn = SKAction.scaleTo(0.4, duration: 0.1)
         let fadeOut = SKAction.fadeOutWithDuration(0.1)
         let delete = SKAction.removeFromParent()
+        
         let explosionSequence = SKAction.sequence([scaleIn, fadeOut, delete])
+        
         explosion.runAction(explosionSequence)
     }
     
@@ -548,7 +638,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_one.position = startPoint
         enemy_one.zPosition = 1
         enemy_one.physicsBody!.affectedByGravity = false
-        enemy_one.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy_one.physicsBody!.categoryBitMask = PhysicsCategories.Apple
         enemy_one.physicsBody!.collisionBitMask = PhysicsCategories.None
         enemy_one.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_one)
@@ -595,7 +685,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_two.position = startPoint_two
         enemy_two.zPosition = 1
         enemy_two.physicsBody!.affectedByGravity = false
-        enemy_two.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy_two.physicsBody!.categoryBitMask = PhysicsCategories.Banana
         enemy_two.physicsBody!.collisionBitMask = PhysicsCategories.None
         enemy_two.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_two)
@@ -641,7 +731,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_three.position = startPoint_three
         enemy_three.zPosition = 1
         enemy_three.physicsBody!.affectedByGravity = false
-        enemy_three.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy_three.physicsBody!.categoryBitMask = PhysicsCategories.Grape
         enemy_three.physicsBody!.collisionBitMask = PhysicsCategories.None
         enemy_three.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_three)
@@ -687,7 +777,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_four.position = startPoint_four
         enemy_four.zPosition = 1
         enemy_four.physicsBody!.affectedByGravity = false
-        enemy_four.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy_four.physicsBody!.categoryBitMask = PhysicsCategories.Orange
         enemy_four.physicsBody!.collisionBitMask = PhysicsCategories.None
         enemy_four.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_four)
@@ -733,7 +823,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy_five.position = startPoint_five
         enemy_five.zPosition = 1
         enemy_five.physicsBody!.affectedByGravity = false
-        enemy_five.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy_five.physicsBody!.categoryBitMask = PhysicsCategories.Watermelon
         enemy_five.physicsBody!.collisionBitMask = PhysicsCategories.None
         enemy_five.physicsBody!.contactTestBitMask = PhysicsCategories.Player
         self.addChild(enemy_five)

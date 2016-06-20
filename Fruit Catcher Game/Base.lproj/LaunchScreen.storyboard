@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -21,10 +22,10 @@
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="iWY-JF-QMj" secondAttribute="trailing" constant="-60" id="A5Q-3b-jWJ"/>
                             <constraint firstItem="iWY-JF-QMj" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="-10" id="Gul-NX-c9f"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iWY-JF-QMj" secondAttribute="trailing" constant="-250" id="K2Z-9M-dnB"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="iWY-JF-QMj" secondAttribute="bottom" constant="-10" id="OjM-gE-Cct"/>
-                            <constraint firstItem="iWY-JF-QMj" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-60" id="dbT-CX-juj"/>
+                            <constraint firstItem="iWY-JF-QMj" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-333" id="cte-zI-ktj"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -34,6 +35,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch_screen" width="2404" height="1216"/>
+        <image name="launch_screen" width="996" height="1342"/>
     </resources>
 </document>

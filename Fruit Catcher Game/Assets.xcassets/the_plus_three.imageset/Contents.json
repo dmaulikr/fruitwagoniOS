@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "the_second_version_logo.png",
+      "filename" : "the_plus_three.png",
       "scale" : "1x"
     },
     {
@@ -11,7 +11,6 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "the_third_version_logo.png",
       "scale" : "3x"
     }
   ],
