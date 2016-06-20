@@ -160,19 +160,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                                   body2.categoryBitMask == PhysicsCategories.Banana)){
             body2.node?.removeFromParent()
             spawnExplosion(body1.node!.position)
-            addScore()
-            //spawnPlusOne(body1.node!.position)
+    
             
                 if body2.categoryBitMask == PhysicsCategories.Apple || body2.categoryBitMask == PhysicsCategories.Banana ||
                    body2.categoryBitMask == PhysicsCategories.Orange{
+                    addScorePlusOne()
                     spawnPlusOne(body1.node!.position)
                     body2.node?.removeFromParent()
                 }
                 if body2.categoryBitMask == PhysicsCategories.Grape{
+                    addScorePlusThree()
                     spawnPlusThree(body1.node!.position)
                     body2.node?.removeFromParent()
                 }
                 if body2.categoryBitMask == PhysicsCategories.Watermelon{
+                    addScorePlusfive()
                     spawnPlusFive(body1.node!.position)
                     body2.node?.removeFromParent()
                 }
@@ -453,11 +455,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func addScore(){
+    func addScorePlusThree(){
+        gameScore += 3
+        scoreLabel.text = "Score: \(gameScore)"
+        
+        if ((gameScore >= 20) && (gameScore  < 40)) || ((gameScore >= 40) && (gameScore < 60)) || (gameScore >= 60){
+            startNewLevel()
+        }
+    }
+    
+    func addScorePlusfive(){
+        gameScore += 5
+        scoreLabel.text = "Score: \(gameScore)"
+        
+        if ((gameScore >= 20) && (gameScore  < 40)) || ((gameScore >= 40) && (gameScore < 60)) || (gameScore >= 60){
+            startNewLevel()
+        }
+    }
+    
+    func addScorePlusOne(){
         gameScore += 1
         scoreLabel.text = "Score: \(gameScore)"
         
-        if gameScore == 20 || gameScore == 40 || gameScore == 60{
+        if ((gameScore >= 20) && (gameScore  < 40)) || ((gameScore >= 40) && (gameScore < 60)) || (gameScore >= 60){
             startNewLevel()
         }
     }
