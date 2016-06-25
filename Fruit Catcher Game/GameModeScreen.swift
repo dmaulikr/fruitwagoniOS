@@ -28,7 +28,7 @@ class GameModeScreen: SKScene{
         gameModeLabel.zPosition = 1
         self.addChild(gameModeLabel)
         
-        wagonLabel.text = "--- WAGON ---"
+        wagonLabel.text = " | WAGON |"
         wagonLabel.fontSize = 110
         wagonLabel.fontColor = SKColor.blackColor()
         wagonLabel.zPosition = 1
@@ -40,7 +40,7 @@ class GameModeScreen: SKScene{
         hand_wagon.zPosition = 1
         self.addChild(hand_wagon)
         
-        touchLabel.text = "--- TOUCH ---"
+        touchLabel.text = "| TOUCH |"
         touchLabel.fontSize = 110
         touchLabel.fontColor = SKColor.blackColor()
         touchLabel.zPosition = 1
@@ -52,7 +52,7 @@ class GameModeScreen: SKScene{
         hand_touch.zPosition = 1
         self.addChild(hand_touch)
         
-        backLabel.text = "--- BACK ---"
+        backLabel.text = "| BACK |"
         backLabel.fontSize = 80
         backLabel.fontColor = SKColor.blackColor()
         backLabel.zPosition = 1

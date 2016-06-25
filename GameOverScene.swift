@@ -65,14 +65,14 @@ class GameOverScene: SKScene{
         highScoreLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.45)
         self.addChild(highScoreLabel)
         
-        restartLabel.text = "--- Restart ---"
+        restartLabel.text = "{Restart}"
         restartLabel.fontSize = 90
         restartLabel.fontColor = SKColor.blackColor()
         restartLabel.zPosition = 1
         restartLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.3)
         self.addChild(restartLabel)
         
-        homeLabel.text = "--- Home ---"
+        homeLabel.text = "{Home}"
         homeLabel.fontSize = 90
         homeLabel.fontColor = SKColor.blackColor()
         homeLabel.zPosition = 1
@@ -80,7 +80,7 @@ class GameOverScene: SKScene{
         self.addChild(homeLabel)
         
         
-        resetScoreLabel.text = "Reset High Score"
+        resetScoreLabel.text = "{Reset High Score}"
         resetScoreLabel.fontSize = 90
         resetScoreLabel.fontColor = SKColor.blackColor()
         resetScoreLabel.zPosition = 1

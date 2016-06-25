@@ -31,7 +31,7 @@ class IntroductionScene: SKScene{
         titleLabel.zPosition = 1
         self.addChild(titleLabel)
         
-        playLabel.text = "--- Play ---"
+        playLabel.text = "| Play |"
         playLabel.fontSize = 110
         playLabel.fontColor = SKColor.blackColor()
         playLabel.zPosition = 1

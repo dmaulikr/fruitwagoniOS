@@ -28,13 +28,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wait_life = SKAction.waitForDuration(10, withRange: 7)
     var wait_ice = SKAction.waitForDuration(10, withRange: 7)
     
-    var levelNumber_a = 0
-    var levelNumber_b = 0
-    var levelNumber_g = 0
-    var levelNumber_o = 0
-    var levelNumber_w = 0
-    var levelNumber_life = 0
-    var levelNumber_Ice = 0
+    var levelNumber_a = 1
+    var levelNumber_b = 1
+    var levelNumber_g = 1
+    var levelNumber_o = 1
+    var levelNumber_w = 1
+    var levelNumber_life = 1
+    var levelNumber_Ice = 1
     var LivesNumber = 3
     let scoreLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
     let livesLabel = SKLabelNode(fontNamed: "Brain Flower Euro")
@@ -47,7 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func startGame(){
         
         if currentGameState == gameState.preGame{
-        
+            
             currentGameState = gameState.inGame
             let fadeOutAction = SKAction.fadeInWithDuration(0.01)
             let deleteAction = SKAction.removeFromParent()
@@ -58,6 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let startLevelAction = SKAction.runBlock(startNewLevel)
             let startGameSequence = SKAction.sequence([wagonMoveOntoScreen, startLevelAction])
             player.runAction(startGameSequence)
+            
         }
     }
     
@@ -66,7 +67,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             startGame()
         }
     }
-    
+
     func runGameOver(){
         self.removeAllActions()
         
@@ -129,15 +130,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let Player : UInt32 = 0b1            // 1
         static let Ice : UInt32 = 0b10              // 2
         static let Life : UInt32 = 0b100            // 4
-        
         static let Apple : UInt32 = 0b1000
         static let Orange : UInt32 = 0b10000
         static let Banana : UInt32 = 0b100000
         static let Watermelon : UInt32 = 0b1000000
         static let Grape : UInt32 = 0b1000000000
-
-        
-        //static let Enemy : UInt32 = 0b1000          // 8
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -240,16 +237,55 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         currentGameState = gameState.inGame
     }
     
+    //............................................................................................... the variables below will dictate how long the fruits will fall for
+    
+    var fall_time_apple = NSTimeInterval.abs(10)
+    var fall_time_banana = NSTimeInterval.abs(10)
+    var fall_time_orange = NSTimeInterval.abs(10)
+    var fall_time_grape = NSTimeInterval.abs(10)
+    var fall_time_watermelon = NSTimeInterval.abs(10)
+    var fall_time_life = NSTimeInterval.abs(10)
+    var fall_time_ice = NSTimeInterval.abs(10)
+    
     func startNewLevel(){
         
-        levelNumber_a += 1
-        levelNumber_b += 1
-        levelNumber_g += 1
-        levelNumber_o += 1
-        levelNumber_w += 1
-        levelNumber_life += 1
-        levelNumber_Ice += 1
-        
+        if ((gameScore >= 0) && (gameScore < 20)){
+            levelNumber_a = 1
+            levelNumber_b = 1
+            levelNumber_g = 1
+            levelNumber_o = 1
+            levelNumber_w = 1
+            levelNumber_life = 1
+            levelNumber_Ice = 1
+        }
+        else if ((gameScore >= 20) && (gameScore  < 80)){
+            levelNumber_a = 2
+            levelNumber_b = 2
+            levelNumber_g = 2
+            levelNumber_o = 2
+            levelNumber_w = 2
+            levelNumber_life = 2
+            levelNumber_Ice = 2
+        }
+        else if ((gameScore >= 80) && (gameScore < 150)){
+            levelNumber_a = 3
+            levelNumber_b = 3
+            levelNumber_g = 3
+            levelNumber_o = 3
+            levelNumber_w = 3
+            levelNumber_life = 3
+            levelNumber_Ice = 3
+        }
+        else if (gameScore >= 150){
+            levelNumber_a = 4
+            levelNumber_b = 4
+            levelNumber_g = 4
+            levelNumber_o = 4
+            levelNumber_w = 4
+            levelNumber_life = 4
+            levelNumber_Ice = 4
+        }
+
         //...........................................................................................  this allows us to stop the current level with it's special key and start a new one
         if self.actionForKey("spawningEnemies_one") != nil{
             self.removeActionForKey("spawningEnemies_one")
@@ -273,60 +309,131 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.removeActionForKey("spawningEnemies_seven")
         }
         
+        //...........................................................................................  the first level is about right
+        //...........................................................................................  the second level is about right
+        //...........................................................................................  remember to adjust falling speed AND timing intervals
+        //...........................................................................................  set the default to the last level because there wont be any more levels after that?
+        //...........................................................................................  REMEMBER: IT WILL VARY BY HALF OF THE RANGE
+        
         switch levelNumber_a{
-        case 1: wait_a = SKAction.waitForDuration(10, withRange: 10)
-        case 2: wait_a = SKAction.waitForDuration(5, withRange: 8)
-        case 3: wait_a = SKAction.waitForDuration(3, withRange: 5)
-        case 4: wait_a = SKAction.waitForDuration(2, withRange: 3)
-        default: wait_a = SKAction.waitForDuration(5.5, withRange: 3)
+        case 1: wait_a = SKAction.waitForDuration(10, withRange: 16)
+                         fall_time_apple = NSTimeInterval.abs(6)
+            
+        case 2: wait_a = SKAction.waitForDuration(4, withRange: 7.9)
+                         fall_time_apple = NSTimeInterval.abs(3)
+            
+        case 3: wait_a = SKAction.waitForDuration(3, withRange: 5.9)
+                         fall_time_apple = NSTimeInterval.abs(2.2)
+
+        case 4: wait_a = SKAction.waitForDuration(2, withRange: 3.9)
+                         fall_time_apple = NSTimeInterval.abs(1.5)
+            
+        default: wait_a = SKAction.waitForDuration(10, withRange: 10)
+                          fall_time_apple = NSTimeInterval.abs(10)
         }
         
         switch levelNumber_b{
-        case 1: wait_b = SKAction.waitForDuration(9, withRange: 10)
-        case 2: wait_b = SKAction.waitForDuration(5, withRange: 8)
-        case 3: wait_b = SKAction.waitForDuration(3, withRange: 6)
-        case 4: wait_b = SKAction.waitForDuration(1.9, withRange: 3)
-        default: wait_b = SKAction.waitForDuration(5.3, withRange: 3)
+        case 1: wait_b = SKAction.waitForDuration(9, withRange: 17)
+                         fall_time_banana = NSTimeInterval.abs(5.5)
+            
+        case 2: wait_b = SKAction.waitForDuration(4, withRange: 7.9)
+                         fall_time_banana = NSTimeInterval.abs(4)
+            
+        case 3: wait_b = SKAction.waitForDuration(3, withRange: 5.9)
+                         fall_time_banana = NSTimeInterval.abs(2.3)
+
+        case 4: wait_b = SKAction.waitForDuration(2, withRange: 3.9)
+                         fall_time_banana = NSTimeInterval.abs(1.6)
+            
+        default: wait_b = SKAction.waitForDuration(10, withRange: 10)
+                          fall_time_banana = NSTimeInterval.abs(10)
         }
         
         switch levelNumber_g{
-        case 1: wait_g = SKAction.waitForDuration(10, withRange: 10)
-        case 2: wait_g = SKAction.waitForDuration(5, withRange: 8)
-        case 3: wait_g = SKAction.waitForDuration(3, withRange: 5)
-        case 4: wait_g = SKAction.waitForDuration(1.2, withRange: 3)
-        default: wait_g = SKAction.waitForDuration(4.8, withRange: 3)
+        case 1: wait_g = SKAction.waitForDuration(10, withRange: 15)
+                         fall_time_grape = NSTimeInterval.abs(5.5)
+            
+        case 2: wait_g = SKAction.waitForDuration(4, withRange: 7.9)
+                         fall_time_grape = NSTimeInterval.abs(3)
+        
+        case 3: wait_g = SKAction.waitForDuration(2.5, withRange: 3.9)
+                         fall_time_grape = NSTimeInterval.abs(2.0)
+     
+        case 4: wait_g = SKAction.waitForDuration(2, withRange: 3.9)
+                         fall_time_grape = NSTimeInterval.abs(1.2)
+            
+        default: wait_g = SKAction.waitForDuration(10, withRange: 10)
+                          fall_time_grape = NSTimeInterval.abs(10)
         }
         
         switch levelNumber_o{
-        case 1: wait_o = SKAction.waitForDuration(11, withRange: 10)
-        case 2: wait_o = SKAction.waitForDuration(6, withRange: 8)
-        case 3: wait_o = SKAction.waitForDuration(5, withRange: 6)
-        case 4: wait_o = SKAction.waitForDuration(1.4, withRange: 3)
-        default: wait_o = SKAction.waitForDuration(5, withRange: 3)
+        case 1: wait_o = SKAction.waitForDuration(11, withRange: 18)
+                         fall_time_orange = NSTimeInterval.abs(4.4)
+            
+        case 2: wait_o = SKAction.waitForDuration(4, withRange: 7.9)
+                         fall_time_orange = NSTimeInterval.abs(3)
+            
+        case 3: wait_o = SKAction.waitForDuration(2, withRange: 3.9)
+                         fall_time_orange = NSTimeInterval.abs(2.2)
+
+        case 4: wait_o = SKAction.waitForDuration(2, withRange: 3.9)
+                         fall_time_orange = NSTimeInterval.abs(1.4)
+            
+        default: wait_o = SKAction.waitForDuration(10, withRange: 10)
+                          fall_time_orange = NSTimeInterval.abs(10)
         }
         
         switch levelNumber_w{
-        case 1: wait_w = SKAction.waitForDuration(12, withRange: 10)
-        case 2: wait_w = SKAction.waitForDuration(7, withRange: 8)
-        case 3: wait_w = SKAction.waitForDuration(6, withRange: 7)
-        case 4: wait_w = SKAction.waitForDuration(4, withRange: 3)
-        default: wait_w = SKAction.waitForDuration(9, withRange: 3)
+        case 1: wait_w = SKAction.waitForDuration(11, withRange: 18)
+                         fall_time_watermelon = NSTimeInterval.abs(4.2)
+            
+        case 2: wait_w = SKAction.waitForDuration(4, withRange: 7.9)
+                         fall_time_watermelon = NSTimeInterval.abs(2.5)
+        
+        case 3: wait_w = SKAction.waitForDuration(3, withRange: 5.9)
+                         fall_time_watermelon = NSTimeInterval.abs(1.9)
+   
+        case 4: wait_w = SKAction.waitForDuration(2, withRange: 3.9)
+                         fall_time_watermelon = NSTimeInterval.abs(0.9)
+            
+        default: wait_w = SKAction.waitForDuration(10, withRange: 10)
+                          fall_time_watermelon = NSTimeInterval.abs(10)
         }
         
+        //....................................... make sure you keep adjusting so that life and Ice do not always appear at the same time
+        
         switch levelNumber_life{
-        case 1: wait_life = SKAction.waitForDuration(20, withRange: 1)
-        case 2: wait_life = SKAction.waitForDuration(20, withRange: 1)
-        case 3: wait_life = SKAction.waitForDuration(20, withRange: 1)
-        case 4: wait_life = SKAction.waitForDuration(20, withRange: 1)
-        default: wait_life = SKAction.waitForDuration(47, withRange: 1)
+        case 1: wait_life = SKAction.waitForDuration(11, withRange: 11)
+                            fall_time_life = NSTimeInterval.abs(4.5)
+        
+        case 2: wait_life = SKAction.waitForDuration(11, withRange: 11)
+                            fall_time_life = NSTimeInterval.abs(4)
+        
+        case 3: wait_life = SKAction.waitForDuration(5, withRange: 5)
+                            fall_time_life = NSTimeInterval.abs(4)
+        
+        case 4: wait_life = SKAction.waitForDuration(5, withRange: 5)
+                            fall_time_life = NSTimeInterval.abs(4)
+        
+        default: wait_life = SKAction.waitForDuration(10, withRange: 10)
+                             fall_time_life = NSTimeInterval.abs(4)
         }
         
         switch levelNumber_Ice{
-        case 1: wait_ice = SKAction.waitForDuration(20, withRange: 1)
-        case 2: wait_ice = SKAction.waitForDuration(20, withRange: 1)
-        case 3: wait_ice = SKAction.waitForDuration(20, withRange: 1)
-        case 4: wait_ice = SKAction.waitForDuration(20, withRange: 1)
-        default: wait_ice = SKAction.waitForDuration(47, withRange: 1)
+        case 1: wait_ice = SKAction.waitForDuration(13, withRange: 4)
+                           fall_time_ice = NSTimeInterval.abs(4.5)
+            
+        case 2: wait_ice = SKAction.waitForDuration(13, withRange: 4)
+                           fall_time_ice = NSTimeInterval.abs(4)
+            
+        case 3: wait_ice = SKAction.waitForDuration(5, withRange: 5)
+                           fall_time_ice = NSTimeInterval.abs(4)
+        
+        case 4: wait_ice = SKAction.waitForDuration(5, withRange: 5)
+                           fall_time_ice = NSTimeInterval.abs(4)
+        
+        default: wait_ice = SKAction.waitForDuration(10, withRange: 10)
+                            fall_time_ice = NSTimeInterval.abs(4)
         }
         
         let spawn_a =  SKAction.runBlock(spawnApples)
@@ -442,7 +549,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.runAction(moveOntoScreen)
         livesLabel.runAction(moveOntoScreen)
         
-        tapToStartLabel.text = "--- Tap to Begin ---"
+        tapToStartLabel.text = "| Tap to Begin |"
         tapToStartLabel.fontSize = 100
         tapToStartLabel.fontColor = SKColor.blackColor()
         tapToStartLabel.zPosition = 1
@@ -458,28 +565,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addScorePlusThree(){
         gameScore += 3
         scoreLabel.text = "Score: \(gameScore)"
-        
-        if ((gameScore >= 20) && (gameScore  < 40)) || ((gameScore >= 40) && (gameScore < 60)) || (gameScore >= 60){
-            startNewLevel()
-        }
+        startNewLevel()
     }
     
     func addScorePlusfive(){
         gameScore += 5
         scoreLabel.text = "Score: \(gameScore)"
-        
-        if ((gameScore >= 20) && (gameScore  < 40)) || ((gameScore >= 40) && (gameScore < 60)) || (gameScore >= 60){
-            startNewLevel()
-        }
+        startNewLevel()
     }
     
     func addScorePlusOne(){
         gameScore += 1
         scoreLabel.text = "Score: \(gameScore)"
-        
-        if ((gameScore >= 20) && (gameScore  < 40)) || ((gameScore >= 40) && (gameScore < 60)) || (gameScore >= 60){
-            startNewLevel()
-        }
+        startNewLevel()
     }
     
     func loseALife(){
@@ -665,7 +763,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         if currentGameState == gameState.inGame{
-            let move_enemy_one = SKAction.moveTo(endPoint, duration: 5)
+            let move_enemy_one = SKAction.moveTo(endPoint, duration: fall_time_apple)
             let delete_enemy_one = SKAction.removeFromParent()
             let loseALifeAction = SKAction.runBlock(loseALife)
             let enemy_one_sequence = SKAction.sequence([move_enemy_one, delete_enemy_one, loseALifeAction])
@@ -711,7 +809,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(enemy_two)
         
         if currentGameState == gameState.inGame{
-            let move_enemy_two = SKAction.moveTo(endPoint_two, duration: 4.5)
+            let move_enemy_two = SKAction.moveTo(endPoint_two, duration: fall_time_banana)
             let delete_enemy_two = SKAction.removeFromParent()
             let loseALifeAction_two = SKAction.runBlock(loseALife)
             let enemy_two_sequence = SKAction.sequence([move_enemy_two, delete_enemy_two,loseALifeAction_two])
@@ -757,7 +855,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(enemy_three)
         
         if currentGameState == gameState.inGame{
-            let move_enemy_three = SKAction.moveTo(endPoint_three, duration: 4)
+            let move_enemy_three = SKAction.moveTo(endPoint_three, duration: fall_time_grape)
             let delete_enemy_three = SKAction.removeFromParent()
             let loseALifeAction_three = SKAction.runBlock(loseALife)
             let enemy_three_sequence = SKAction.sequence([move_enemy_three, delete_enemy_three, loseALifeAction_three])
@@ -803,7 +901,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(enemy_four)
         
         if currentGameState == gameState.inGame{
-            let move_enemy_four = SKAction.moveTo(endPoint_four, duration: 5)
+            let move_enemy_four = SKAction.moveTo(endPoint_four, duration: fall_time_orange)
             let delete_enemy_four = SKAction.removeFromParent()
             let loseALifeAction_four = SKAction.runBlock(loseALife)
             let enemy_four_sequence = SKAction.sequence([move_enemy_four, delete_enemy_four, loseALifeAction_four])
@@ -849,7 +947,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(enemy_five)
         
         if currentGameState == gameState.inGame{
-            let move_enemy_five = SKAction.moveTo(endPoint_five, duration: 3.5)
+            let move_enemy_five = SKAction.moveTo(endPoint_five, duration: fall_time_watermelon)
             let delete_enemy_five = SKAction.removeFromParent()
             let loseALifeAction_five = SKAction.runBlock(loseALife)
             let enemy_five_sequence = SKAction.sequence([move_enemy_five, delete_enemy_five, loseALifeAction_five])
@@ -896,7 +994,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(enemy_six)
         
         if currentGameState == gameState.inGame{
-            let move_enemy_six = SKAction.moveTo(endPoint_six, duration: 6)
+            let move_enemy_six = SKAction.moveTo(endPoint_six, duration: fall_time_life)
             let delete_enemy_six = SKAction.removeFromParent()
             let enemy_six_sequence = SKAction.sequence([move_enemy_six, delete_enemy_six])
             enemy_six.runAction(enemy_six_sequence)
@@ -933,7 +1031,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(enemy_seven)
         
         if currentGameState == gameState.inGame{
-            let move_enemy_seven = SKAction.moveTo(endPoint_seven, duration: 6)
+            let move_enemy_seven = SKAction.moveTo(endPoint_seven, duration: fall_time_ice)
             let delete_enemy_seven = SKAction.removeFromParent()
             let enemy_seven_sequence = SKAction.sequence([move_enemy_seven, delete_enemy_seven])
             enemy_seven.runAction(enemy_seven_sequence)
