@@ -258,7 +258,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             levelNumber_life = 1
             levelNumber_Ice = 1
         }
-        else if ((gameScore >= 20) && (gameScore  < 80)){
+        else if ((gameScore >= 20) && (gameScore  < 100)){
             levelNumber_a = 2
             levelNumber_b = 2
             levelNumber_g = 2
@@ -267,7 +267,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             levelNumber_life = 2
             levelNumber_Ice = 2
         }
-        else if ((gameScore >= 80) && (gameScore < 150)){
+        else if ((gameScore >= 100) && (gameScore < 310)){
             levelNumber_a = 3
             levelNumber_b = 3
             levelNumber_g = 3
@@ -276,7 +276,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             levelNumber_life = 3
             levelNumber_Ice = 3
         }
-        else if (gameScore >= 150){
+        else if (gameScore >= 310){
             levelNumber_a = 4
             levelNumber_b = 4
             levelNumber_g = 4
@@ -314,10 +314,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //...........................................................................................  remember to adjust falling speed AND timing intervals
         //...........................................................................................  set the default to the last level because there wont be any more levels after that?
         //...........................................................................................  REMEMBER: IT WILL VARY BY HALF OF THE RANGE
+        //...........................................................................................  "withRange" should be 0.1 less than  2 * waitForDuration
         
         switch levelNumber_a{
-        case 1: wait_a = SKAction.waitForDuration(10, withRange: 16)
-                         fall_time_apple = NSTimeInterval.abs(6)
+        case 1: wait_a = SKAction.waitForDuration(8, withRange: 15.9)
+                         fall_time_apple = NSTimeInterval.abs(5)
             
         case 2: wait_a = SKAction.waitForDuration(4, withRange: 7.9)
                          fall_time_apple = NSTimeInterval.abs(3)
@@ -328,12 +329,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 4: wait_a = SKAction.waitForDuration(2, withRange: 3.9)
                          fall_time_apple = NSTimeInterval.abs(1.5)
             
-        default: wait_a = SKAction.waitForDuration(10, withRange: 10)
-                          fall_time_apple = NSTimeInterval.abs(10)
+        default: wait_a = SKAction.waitForDuration(3, withRange: 5.9)
+                          fall_time_apple = NSTimeInterval.abs(2.2)
         }
         
         switch levelNumber_b{
-        case 1: wait_b = SKAction.waitForDuration(9, withRange: 17)
+        case 1: wait_b = SKAction.waitForDuration(8, withRange: 15.9)
                          fall_time_banana = NSTimeInterval.abs(5.5)
             
         case 2: wait_b = SKAction.waitForDuration(4, withRange: 7.9)
@@ -345,13 +346,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 4: wait_b = SKAction.waitForDuration(2, withRange: 3.9)
                          fall_time_banana = NSTimeInterval.abs(1.6)
             
-        default: wait_b = SKAction.waitForDuration(10, withRange: 10)
-                          fall_time_banana = NSTimeInterval.abs(10)
+        default: wait_b = SKAction.waitForDuration(3, withRange: 5.9)
+                          fall_time_banana = NSTimeInterval.abs(2.3)
         }
         
         switch levelNumber_g{
-        case 1: wait_g = SKAction.waitForDuration(10, withRange: 15)
-                         fall_time_grape = NSTimeInterval.abs(5.5)
+        case 1: wait_g = SKAction.waitForDuration(8, withRange: 15.9)
+                         fall_time_grape = NSTimeInterval.abs(4)
             
         case 2: wait_g = SKAction.waitForDuration(4, withRange: 7.9)
                          fall_time_grape = NSTimeInterval.abs(3)
@@ -362,13 +363,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 4: wait_g = SKAction.waitForDuration(2, withRange: 3.9)
                          fall_time_grape = NSTimeInterval.abs(1.2)
             
-        default: wait_g = SKAction.waitForDuration(10, withRange: 10)
-                          fall_time_grape = NSTimeInterval.abs(10)
+        default: wait_g = SKAction.waitForDuration(2.5, withRange: 3.9)
+                          fall_time_grape = NSTimeInterval.abs(2.0)
         }
         
         switch levelNumber_o{
-        case 1: wait_o = SKAction.waitForDuration(11, withRange: 18)
-                         fall_time_orange = NSTimeInterval.abs(4.4)
+        case 1: wait_o = SKAction.waitForDuration(8, withRange: 15.9)
+                         fall_time_orange = NSTimeInterval.abs(4.5)
             
         case 2: wait_o = SKAction.waitForDuration(4, withRange: 7.9)
                          fall_time_orange = NSTimeInterval.abs(3)
@@ -379,13 +380,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 4: wait_o = SKAction.waitForDuration(2, withRange: 3.9)
                          fall_time_orange = NSTimeInterval.abs(1.4)
             
-        default: wait_o = SKAction.waitForDuration(10, withRange: 10)
-                          fall_time_orange = NSTimeInterval.abs(10)
+        default: wait_o = SKAction.waitForDuration(2, withRange: 3.9)
+                          fall_time_orange = NSTimeInterval.abs(2.2)
         }
         
         switch levelNumber_w{
-        case 1: wait_w = SKAction.waitForDuration(11, withRange: 18)
-                         fall_time_watermelon = NSTimeInterval.abs(4.2)
+        case 1: wait_w = SKAction.waitForDuration(8, withRange: 15.9)
+                         fall_time_watermelon = NSTimeInterval.abs(3.5)
             
         case 2: wait_w = SKAction.waitForDuration(4, withRange: 7.9)
                          fall_time_watermelon = NSTimeInterval.abs(2.5)
@@ -394,10 +395,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                          fall_time_watermelon = NSTimeInterval.abs(1.9)
    
         case 4: wait_w = SKAction.waitForDuration(2, withRange: 3.9)
-                         fall_time_watermelon = NSTimeInterval.abs(0.9)
+                         fall_time_watermelon = NSTimeInterval.abs(1.1)
             
-        default: wait_w = SKAction.waitForDuration(10, withRange: 10)
-                          fall_time_watermelon = NSTimeInterval.abs(10)
+        default: wait_w = SKAction.waitForDuration(3, withRange: 5.9)
+                          fall_time_watermelon = NSTimeInterval.abs(1.9)
         }
         
         //....................................... make sure you keep adjusting so that life and Ice do not always appear at the same time
